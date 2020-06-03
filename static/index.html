@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Key parser</title>
+    </head>
+    <script>
+        function load() {
+            const keys = window.location.hash.substr(1).split('&').map((k) => k.split('=')).filter((k) => ["id_token", "access_token"].includes(k[0]))
+            const table = document.getElementById('theGoods')
+
+            keys.forEach((k) => {
+                const row = table.insertRow(1)
+                const cell1 = row.insertCell(0)
+                const cell2 = row.insertCell(1)
+                const cell3 = row.insertCell(2)
+
+                cell1.innerHTML = k[0]
+                cell2.innerHTML = k[1]
+                cell3.innerHTML = `<pre><code>${JSON.stringify(JSON.parse(atob(k[1].split('.')[1])), null, 4)}</code></pre>`
+            })
+        }
+    </script>
+    <body onload="load()">
+        <h1>Keys:</h1>
+        <table border="1" id="theGoods">
+            <thead>
+                <tr>
+                    <td style="width: 10%;">Key Type</td>
+                    <td>Token</td>
+                    <td style="width: 40%;">Info</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <hr/>
+        <marquee>90's Scrolling text...just because</marquee>
+    </body>
+
+    
+</html>
